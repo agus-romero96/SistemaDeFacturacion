@@ -116,9 +116,8 @@ class MenuCompras(wx.Frame):
 
                 # Ocultar botones si el carrito queda vacío
                 if not self.carrito:
-                    self.btn_quitar.Hide()
-                    self.btn_facturar.Hide()
-                    self.carrito_list.Hide()
+                    self.btn_quitar.Disable()
+                    self.btn_facturar.Disable()
                     self.Layout()
 
             except ValueError as e:

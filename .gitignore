@@ -5,6 +5,8 @@
 dependencias/
 entorno/
 utilidades/
+build/
+dist/
 # Ignorar archivos generados por el sistema operativo
 __pycache__/
 *.pyc
