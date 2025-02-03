@@ -15,7 +15,7 @@ class MenuCompras(wx.Frame):
         self.sizer = wx.BoxSizer(wx.VERTICAL)
 
         # Etiqueta para filtro
-        self.label_filtro = wx.StaticText(panel, label="Filtrar productos por:")
+        self.label_filtro = wx.StaticText(panel, label="&Filtrar productos por:")
         self.sizer.Add(self.label_filtro, 0, wx.LEFT | wx.TOP, 5)
 
         # ComboBox para categorías
@@ -25,7 +25,7 @@ class MenuCompras(wx.Frame):
 
 
         # Etiqueta para la lista de productos
-        self.label_productos = wx.StaticText(panel, label="Lista de Productos:")
+        self.label_productos = wx.StaticText(panel, label="&Lista de Productos:")
         self.sizer.Add(self.label_productos, 0, wx.LEFT | wx.TOP, 5)
 
         # Lista de productos
@@ -39,7 +39,7 @@ class MenuCompras(wx.Frame):
         self.sizer.Add(self.list_control, 1, wx.EXPAND | wx.ALL, 5)
 
         # Etiqueta para el carrito de compras
-        self.label_carrito = wx.StaticText(panel, label="Carrito de Compras:")
+        self.label_carrito = wx.StaticText(panel, label="Carrito &de Compras:")
         self.sizer.Add(self.label_carrito, 0, wx.LEFT | wx.TOP, 5)
 
         # Carrito de compras
@@ -60,10 +60,9 @@ class MenuCompras(wx.Frame):
         self.btn_facturar = wx.Button(button_panel, label="&Facturar")
         self.btn_salir = wx.Button(button_panel, label="&Volver al menú principal")
 
-        # Ocultar botones y el carrito de compras al inicio
-        self.btn_quitar.Hide()
-        self.btn_facturar.Hide()
-        self.carrito_list.Hide()
+        # desabilitar botones de facturar y quitar del carrito cuando se inicie la ventana
+        self.btn_quitar.Disable()
+        self.btn_facturar.Disable()
 
         button_sizer.Add(self.btn_agregar, 0, wx.RIGHT, 5)
         button_sizer.Add(self.btn_quitar, 0, wx.RIGHT, 5)
@@ -151,15 +150,15 @@ class MenuCompras(wx.Frame):
         if selected == -1:
             wx.MessageBox("Seleccione un producto primero.", "Error", wx.ICON_ERROR)
             return
+
         # Obtener detalles del producto seleccionado
         codigo = self.list_control.GetItemText(selected, 0)
         try:
-            # Buscar el objeto Producto en la base de datos
+            # Buscar el Producto en la base de datos
             producto = Producto.objects.get(codigo=codigo)
         except Producto.DoesNotExist:
             wx.MessageBox("El producto no existe en la base de datos.", "Error", wx.ICON_ERROR)
             return
-        # Abrir un cuadro de diálogo para ingresar la cantidad
         dlg = wx.TextEntryDialog(self, 'Cantidad:', 'Cantidad')
         if dlg.ShowModal() == wx.ID_OK:
             try:
@@ -169,33 +168,52 @@ class MenuCompras(wx.Frame):
                 if cantidad > producto.stock:
                     wx.MessageBox(f"Stock insuficiente. Solo hay {producto.stock} unidades disponibles.", "Error", wx.ICON_ERROR)
                     return
-                # Calcular el total
-                precio = float(producto.precio)
-                total = cantidad * precio
-                # Agregar el producto al carrito
-                self.carrito.append({
-                    'producto': producto,  # Agregar el objeto Producto al carrito
-                    'codigo': producto.codigo,
-                    'nombre': producto.nombre,
-                    'cantidad': cantidad,
-                    'precio': precio,
-                    'total': total
-                })
-                # Actualizar la lista del carrito
-                index = self.carrito_list.GetItemCount()
-                self.carrito_list.InsertItem(index, producto.codigo)
-                self.carrito_list.SetItem(index, 1, producto.nombre)
-                self.carrito_list.SetItem(index, 2, str(cantidad))
-                self.carrito_list.SetItem(index, 3, f"${precio:.2f}")
-                self.carrito_list.SetItem(index, 4, f"${total:.2f}")
-                # Hacer visibles los botones y el carrito
-                self.btn_quitar.Show()
-                self.btn_facturar.Show()
-                self.carrito_list.Show()
+
+                # Verificar si el producto ya está en el carrito
+                for idx, item in enumerate(self.carrito):
+                    if item['codigo'] == codigo:
+                        # Actualizar la cantidad y el total del producto existente
+                        nueva_cantidad = item['cantidad'] + cantidad
+                        if nueva_cantidad > producto.stock:
+                            wx.MessageBox(f"Stock insuficiente. Solo hay {producto.stock} unidades disponibles.", "Error", wx.ICON_ERROR)
+                            return
+
+                        self.carrito[idx]['cantidad'] = nueva_cantidad
+                        self.carrito[idx]['total'] = nueva_cantidad * item['precio']
+
+                        # Actualizar la lista del carrito
+                        self.carrito_list.SetItem(idx, 2, str(nueva_cantidad))
+                        self.carrito_list.SetItem(idx, 4, f"${self.carrito[idx]['total']:.2f}")
+                        break
+                else:
+                    # Si el producto no está en el carrito, agregarlo como nuevo
+                    precio = float(producto.precio)
+                    total = cantidad * precio
+                    self.carrito.append({
+                        'producto': producto,  # Agregar el objeto Producto al carrito
+                        'codigo': producto.codigo,
+                        'nombre': producto.nombre,
+                        'cantidad': cantidad,
+                        'precio': precio,
+                        'total': total
+                    })
+                    # Agregar el producto a la lista del carrito
+                    index = self.carrito_list.GetItemCount()
+                    self.carrito_list.InsertItem(index, producto.codigo)
+                    self.carrito_list.SetItem(index, 1, producto.nombre)
+                    self.carrito_list.SetItem(index, 2, str(cantidad))
+                    self.carrito_list.SetItem(index, 3, f"${precio:.2f}")
+                    self.carrito_list.SetItem(index, 4, f"${total:.2f}")
+                # actualizar la lista de productos
+                self.update_categoria()
+                # Habilitar botones de facturar y quitar del carrito
+                self.btn_quitar.Enable()
+                self.btn_facturar.Enable()
+                self.Layout()
+
             except ValueError as e:
                 wx.MessageBox(f"Entrada no válida: {e}", "Error", wx.ICON_ERROR)
         dlg.Destroy()
-
 
 
     def filtrar_por_categoria(self, event):
@@ -231,12 +249,12 @@ class MenuCompras(wx.Frame):
         dlg = wx.Dialog(self, title="Seleccionar Cliente", size=(400, 200))
         dlg_sizer = wx.BoxSizer(wx.VERTICAL)
         # Etiqueta y cuadro de texto para ingresar la cédula
-        cedula_label = wx.StaticText(dlg, label="Ingrese la cédula del cliente (dejar en blanco para escoger un usuario de la lista):")
+        cedula_label = wx.StaticText(dlg, label="&Ingrese la cédula del cliente (dejar en blanco para escoger un usuario de la lista):")
         cedula_text = wx.TextCtrl(dlg)
         dlg_sizer.Add(cedula_label, 0, wx.ALL, 5)
         dlg_sizer.Add(cedula_text, 0, wx.EXPAND | wx.ALL, 5)
         # Etiqueta y ComboBox para seleccionar cliente
-        combo_label = wx.StaticText(dlg, label="O seleccione un cliente de la lista:")
+        combo_label = wx.StaticText(dlg, label="&O seleccione un cliente de la lista:")
         combo_box = wx.ComboBox(dlg, choices=[
             f"{cliente.cedula} - {cliente.nombre} {cliente.apellido}" for cliente in Cliente.objects.all()
         ], style=wx.CB_READONLY)
@@ -286,17 +304,14 @@ class MenuCompras(wx.Frame):
                 # Limpiar carrito
                 self.carrito = []
                 self.carrito_list.DeleteAllItems()
-                # Actualizar la lista con la categoría guardada
+                # Actualizar la lista con la categoría guardada, y ocultar botones
                 self.update_categoria(categoria)
+                self.btn_quitar.Disable()
+                self.btn_facturar.Disable()
                 self.Layout()
                 # Generar el PDF con los detalles de la factura
                 self.generar_pdf_factura(factura)
                 wx.MessageBox(f'Factura generada con éxito\nTotal: ${factura.total}', 'Éxito', wx.OK | wx.ICON_INFORMATION)
-                # Ocultar botones y el carrito
-                self.btn_quitar.Hide()
-                self.btn_facturar.Hide()
-                self.carrito_list.Hide()
-                self.Layout()
             except Cliente.DoesNotExist:
                 wx.MessageBox('Cliente no encontrado. Agregue el cliente.', 'Error', wx.OK | wx.ICON_ERROR)
                 dlg.Destroy()

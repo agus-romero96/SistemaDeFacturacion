@@ -5,87 +5,78 @@ from gestion.menu_compras import MenuCompras
 
 class VentanaBienvenida(wx.Frame):
     def __init__(self):
-        super().__init__(None, title="Bienvenido al Sistema", size=(500, 400))
-        
+        super().__init__(None, title="Bienvenido al Sistema", size=(600, 500))
+
         panel = wx.Panel(self)
-        panel.SetBackgroundColour(wx.Colour(240, 240, 240))  # Fondo suave
+        panel.SetBackgroundColour(wx.Colour(240, 240, 240))  # Fondo gris muy claro
+
         sizer = wx.BoxSizer(wx.VERTICAL)
-        
+
         # Fuente para título
-        font = wx.Font(20, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
-        
-        # Sombra del título
-        sombra_titulo = wx.StaticText(panel, label="Bienvenido al Sistema de Ventas")
-        sombra_titulo.SetFont(font)
-        sombra_titulo.SetForegroundColour(wx.Colour(100, 100, 100))  # Gris oscuro
-        sombra_titulo.SetPosition((11, 21))  # Posición desplazada para la sombra
-        
-        # Título principal
-        titulo = wx.StaticText(panel, label="Bienvenido al Sistema de Ventas")
-        titulo.SetFont(font)
-        titulo.SetForegroundColour(wx.Colour(33, 47, 61))  # Texto oscuro
-        titulo.SetBackgroundColour(wx.Colour(255, 223, 186))  # Fondo naranja claro
-        titulo.SetWindowStyle(wx.BORDER_SIMPLE)  # Borde alrededor
-        titulo.SetPosition((10, 20))  # Posición principal
-        
+        font_titulo = wx.Font(30, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+
+        # **Título con fondo similar al fondo general**
+        titulo = wx.StaticText(panel, label="¡Sistema de Ventas!")
+        titulo.SetFont(font_titulo)
+        titulo.SetForegroundColour(wx.Colour(21, 67, 96))  # Azul oscuro elegante
+        titulo.SetBackgroundColour(wx.Colour(212, 230, 241))  # Azul pastel similar al fondo
+        titulo.SetWindowStyle(wx.BORDER_SIMPLE)
+        titulo.Wrap(600)
+
         # Imagen
-        try:
-            ruta_imagen = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logo.jpg")
-            image = wx.Image(ruta_imagen, wx.BITMAP_TYPE_ANY)
-            image = image.Scale(200, 150, wx.IMAGE_QUALITY_HIGH).ConvertToBitmap()  # Redimensiona la imagen
-            image_ctrl = wx.StaticBitmap(panel, wx.ID_ANY, image)
-        except Exception as e:
-            wx.MessageBox(f"No se pudo cargar la imagen: {e}", "Error", wx.ICON_ERROR)
-            image_ctrl = wx.StaticBitmap(panel, wx.ID_ANY, wx.Bitmap(1, 1))  # Imagen vacía
-        
-        # Botones de opciones
-        btn_admin = wx.Button(panel, label="Entrar como &Administrador", size=(200, 50))
-        btn_compras = wx.Button(panel, label="Entrar al menú de &compras", size=(200, 50))
-        btn_salir = wx.Button(panel, label="&Salir", size=(200, 50))
-        
-        # Colores iniciales de los botones
-        self.configurar_boton(btn_admin, wx.Colour(41, 128, 185), wx.Colour(255, 255, 255))  # Azul
-        self.configurar_boton(btn_compras, wx.Colour(39, 174, 96), wx.Colour(255, 255, 255))  # Verde
-        self.configurar_boton(btn_salir, wx.Colour(192, 57, 43), wx.Colour(255, 255, 255))  # Rojo
-        
-        # Eventos de hover
-        btn_admin.Bind(wx.EVT_ENTER_WINDOW, lambda evt: self.on_hover_enter(evt, btn_admin, wx.Colour(93, 173, 226)))  # Azul claro
-        btn_admin.Bind(wx.EVT_LEAVE_WINDOW, lambda evt: self.on_hover_leave(evt, btn_admin, wx.Colour(41, 128, 185)))  # Azul original
-        btn_compras.Bind(wx.EVT_ENTER_WINDOW, lambda evt: self.on_hover_enter(evt, btn_compras, wx.Colour(82, 190, 128)))  # Verde claro
-        btn_compras.Bind(wx.EVT_LEAVE_WINDOW, lambda evt: self.on_hover_leave(evt, btn_compras, wx.Colour(39, 174, 96)))  # Verde original
-        btn_salir.Bind(wx.EVT_ENTER_WINDOW, lambda evt: self.on_hover_enter(evt, btn_salir, wx.Colour(231, 76, 60)))  # Rojo claro
-        btn_salir.Bind(wx.EVT_LEAVE_WINDOW, lambda evt: self.on_hover_leave(evt, btn_salir, wx.Colour(192, 57, 43)))  # Rojo original
-        
-        # Enlazar eventos de clic
-        btn_admin.Bind(wx.EVT_BUTTON, self.entrar_como_admin)
-        btn_compras.Bind(wx.EVT_BUTTON, self.entrar_como_cliente)
-        btn_salir.Bind(wx.EVT_BUTTON, self.salir)
-        
-        # Añadir widgets al sizer
+        ruta_imagen = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logo.jpg")
+        image_ctrl = self.cargar_imagen(panel, ruta_imagen, (300, 250))
+
+        # Botones con colores mejorados
+        botones_sizer = wx.BoxSizer(wx.HORIZONTAL)
+        font_botones = wx.Font(12, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+
+        botones_info = [
+            ("Administrador", wx.Colour(41, 128, 185), self.entrar_como_admin),  # Azul fuerte
+            ("Compras", wx.Colour(39, 174, 96), self.entrar_como_cliente),  # Verde fuerte
+            ("Salir", wx.Colour(192, 57, 43), self.salir)  # Rojo oscuro
+        ]
+
+        self.botones = []
+        for label, color, action in botones_info:
+            btn = wx.Button(panel, label=label, size=(180, 50))
+            btn.SetFont(font_botones)
+            btn.SetBackgroundColour(color)
+            btn.SetForegroundColour(wx.Colour(255, 255, 255))  # Texto blanco
+            btn.Bind(wx.EVT_BUTTON, action)
+            btn.Bind(wx.EVT_ENTER_WINDOW, lambda evt, b=btn, c=color: self.on_hover(evt, b, c, True))
+            btn.Bind(wx.EVT_LEAVE_WINDOW, lambda evt, b=btn, c=color: self.on_hover(evt, b, c, False))
+            botones_sizer.Add(btn, 0, wx.ALL, 10)
+            self.botones.append(btn)
+
+        # Añadir widgets al sizer principal
         sizer.AddStretchSpacer()
         sizer.Add(titulo, 0, wx.ALL | wx.CENTER, 20)
         sizer.Add(image_ctrl, 0, wx.ALL | wx.CENTER, 20)
-        sizer.Add(btn_admin, 0, wx.ALL | wx.CENTER, 10)
-        sizer.Add(btn_compras, 0, wx.ALL | wx.CENTER, 10)
-        sizer.Add(btn_salir, 0, wx.ALL | wx.CENTER, 10)
+        sizer.Add(botones_sizer, 0, wx.ALL | wx.CENTER, 10)
         sizer.AddStretchSpacer()
-        
+
         panel.SetSizer(sizer)
         self.Centre()
-    
-    # Configuración inicial de botones
-    def configurar_boton(self, boton, color_fondo, color_texto):
-        boton.SetBackgroundColour(color_fondo)
-        boton.SetForegroundColour(color_texto)
-    
-    # Evento al pasar el cursor sobre el botón
-    def on_hover_enter(self, event, button, color_hover):
-        button.SetBackgroundColour(color_hover)
-        button.Refresh()
-    
-    # Evento al salir el cursor del botón
-    def on_hover_leave(self, event, button, color_original):
-        button.SetBackgroundColour(color_original)
+
+    def cargar_imagen(self, panel, ruta, size):
+        """Carga una imagen y la redimensiona"""
+        if os.path.exists(ruta):
+            try:
+                image = wx.Image(ruta, wx.BITMAP_TYPE_ANY).Scale(*size, wx.IMAGE_QUALITY_HIGH).ConvertToBitmap()
+                return wx.StaticBitmap(panel, wx.ID_ANY, image)
+            except Exception as e:
+                wx.MessageBox(f"No se pudo cargar la imagen: {e}", "Error", wx.ICON_ERROR)
+        return wx.StaticBitmap(panel, wx.ID_ANY, wx.Bitmap(1, 1))  # Imagen vacía en caso de error
+
+    def on_hover(self, event, button, original_color, enter):
+        """Efecto de hover con colores más marcados"""
+        hover_color = wx.Colour(
+            min(original_color.Red() + 30, 255),
+            min(original_color.Green() + 30, 255),
+            min(original_color.Blue() + 30, 255)
+        )
+        button.SetBackgroundColour(hover_color if enter else original_color)
         button.Refresh()
 
     def entrar_como_admin(self, event):
@@ -93,31 +84,23 @@ class VentanaBienvenida(wx.Frame):
         dialogo_login = VentanaLogin(self)
         if dialogo_login.ShowModal() == wx.ID_OK:
             self.Hide()
-            ventana_admin = VentanaAdmin(self)
-            ventana_admin.Show()
+            VentanaAdmin(self).Show()
         dialogo_login.Destroy()
 
     def entrar_como_cliente(self, event):
-        """
-        Abrir la ventana de compras
-        y ocultar la ventana principal
-        """
+        """Abrir la ventana de compras"""
         self.Hide()
-        ventana_cliente = MenuCompras(self)
-        ventana_cliente.Show()
+        MenuCompras(self).Show()
 
     def salir(self, event):
-        """Salir de la aplicación"""
-        wx.MessageBox("¡Gracias por probar el sistema!", 
-                      "Información", wx.ICON_INFORMATION)
-        self.Close()
+        """Salir con confirmación"""
+        if wx.MessageBox("¿Seguro que deseas salir?", "Confirmación", wx.YES_NO | wx.ICON_QUESTION) == wx.YES:
+            self.Close()
 
 class Aplicacion(wx.App):
     def OnInit(self):
-        ventana = VentanaBienvenida()
-        ventana.Show()
+        VentanaBienvenida().Show()
         return True
-
 
 if __name__ == "__main__":
     app = Aplicacion()
