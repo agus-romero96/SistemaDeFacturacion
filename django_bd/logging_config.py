@@ -3,9 +3,12 @@ import sys
 import io
 import logging
 from datetime import datetime
-# Redirigir la salida estándar y de error a UTF-8
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+
+# Verificar que sys.stdout y sys.stderr no sean None antes de redirigirlos
+if getattr(sys, 'stdout', None):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+if getattr(sys, 'stderr', None):
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 # Determinar el directorio base según si el script está congelado (ejecutable) o no
 if getattr(sys, 'frozen', False):

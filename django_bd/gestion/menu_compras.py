@@ -266,10 +266,11 @@ class MenuCompras(wx.Frame):
                 logger.info("actualizando la lista de productos")
                 # Habilitar botones de facturar y quitar del carrito
                 try:
-                    self.btn_quitar.Enable()
-                    self.btn_facturar.Enable()
-                    self.Layout()
-                    logger.info("botones de quitar y facturar habilitados")
+                    if not self.btn_quitar.IsEnabled() and not self.btn_facturar.IsEnabled():
+                        self.btn_quitar.Enable()
+                        self.btn_facturar.Enable()
+                        self.Layout()
+                        logger.info("botones de quitar y facturar habilitados")
                 except Exception as e:
                     logger.error("Error al habilitar botones de quitar y facturar: %s", traceback.format_exc())
                     raise
@@ -281,26 +282,19 @@ class MenuCompras(wx.Frame):
 
     def filtrar_por_categoria(self, event):
         """Filtrar productos según la categoría seleccionada"""
-        try:
-            logger.info("filtrando productos por categoría")
-            categoria = self.combo_categorias.GetValue()
-            if categoria == "Mostrar Todos":
-                categoria = None
-            self.update_categoria(categoria=categoria)
-            logger.info("productos filtrados por categoría")
-        except Exception as e:
-            logger.error("Error al filtrar productos por categoría: %s", traceback.format_exc())
+        categoria = self.combo_categorias.GetValue()
+        if categoria == "Mostrar Todos":
+            categoria = None
+        self.update_categoria(categoria=categoria)
 
     def update_categoria(self, categoria=None):
         """Actualizar la lista de productos, opcionalmente filtrados por categoría"""
         try:
             self.list_control.DeleteAllItems()
-            logger.info("eliminando todos los productos de la lista")
             if categoria:
                 logger.info("filtrando productos por la categoría: %s", categoria)
                 productos = Producto.objects.filter(categoria__nombre=categoria)
             else:
-                logger.info("obteniendo todos los productos")
                 productos = Producto.objects.all()
             for producto in productos:
                 index = self.list_control.InsertItem(self.list_control.GetItemCount(), producto.codigo)
@@ -309,7 +303,6 @@ class MenuCompras(wx.Frame):
                 self.list_control.SetItem(index, 3, str(producto.stock))
                 self.list_control.SetItem(index, 4, producto.categoria.nombre)
                 self.list_control.SetItem(index, 5, producto.proveedor.nombre)
-            logger.info("productos actualizados en la lista")
         except Exception as e:
             logger.error("Error al actualizar la lista de productos: %s", traceback.format_exc())
 
