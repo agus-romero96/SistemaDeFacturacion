@@ -1,0 +1,28 @@
+2025-02-06 07:59:27,537 - INFO - Iniciando aplicación...
+2025-02-06 07:59:27,538 - DEBUG - Versión de Python: 3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]
+2025-02-06 07:59:27,538 - DEBUG - Sistema operativo: nt
+2025-02-06 07:59:28,237 - INFO - Módulos para menú admin importados correctamente.
+2025-02-06 07:59:28,239 - INFO - Módulos para menú de compras importados correctamente.
+2025-02-06 07:59:28,239 - INFO - Módulos para main importados correctamente
+2025-02-06 07:59:28,240 - INFO - Iniciando bucle principal
+2025-02-06 07:59:28,251 - DEBUG - interfaz de main inicializada
+2025-02-06 07:59:28,259 - DEBUG - Buscando imagen en: C:\Users\roddy\Documents\github\SistemaDeFacturacion\django_bd\logo.jpg
+2025-02-06 07:59:28,260 - DEBUG - Intentando cargar imagen desde: C:\Users\roddy\Documents\github\SistemaDeFacturacion\django_bd\logo.jpg
+2025-02-06 07:59:28,337 - DEBUG - Botón creado: Administrador
+2025-02-06 07:59:28,340 - DEBUG - Botón creado: Compras
+2025-02-06 07:59:28,342 - DEBUG - Botón creado: Salir
+2025-02-06 07:59:28,342 - DEBUG - Interfaz gráfica creada correctamente
+2025-02-06 07:59:29,675 - INFO - Intentando acceder como administrador
+2025-02-06 07:59:29,681 - DEBUG - VentanaLogin inicializada.
+2025-02-06 07:59:29,703 - INFO - VentanaLogin configurada correctamente.
+2025-02-06 07:59:33,579 - DEBUG - Validando login.
+2025-02-06 07:59:33,579 - INFO - Módulos de autenticación importados correctamente.
+2025-02-06 07:59:34,292 - INFO - Login exitoso para usuario: dean
+2025-02-06 07:59:34,304 - DEBUG - Login de administrador exitoso
+2025-02-06 07:59:34,324 - DEBUG - VentanaAdmin inicializada.
+2025-02-06 07:59:34,506 - INFO - VentanaAdmin configurada correctamente.
+2025-02-06 07:59:34,614 - INFO - Ventana de administración mostrada
+2025-02-06 08:00:02,548 - INFO - Se ha solicitado volver al menú principal desde VentanaAdmin.
+2025-02-06 08:00:04,470 - INFO - Solicitud de salida recibida
+2025-02-06 08:00:05,706 - INFO - Usuario confirmó salida
+2025-02-06 08:00:05,768 - INFO - Aplicación finalizada correctamente

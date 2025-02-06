@@ -2,6 +2,7 @@ import wx
 import configparser
 import os
 
+
 # Crear una instancia de ConfigParser
 config = configparser.ConfigParser()
 
@@ -122,3 +123,19 @@ class Configuraciones(wx.Panel):
         formulario = FormularioEmpresa(self, empresa=empresa)
         if formulario.ShowModal() == wx.ID_OK:
             self.actualizar_interfaz()  # Actualizar la interfaz después de agregar/actualizar la empresa
+
+    def GuardarRuta(self, ruta):
+        """Guarda la ruta en el archivo de configuración."""
+        carpeta_utilidades = 'django_bd/utilidades'
+        if not os.path.exists(carpeta_utilidades):
+            os.makedirs(carpeta_utilidades)
+        ruta_config_local = os.path.join(carpeta_utilidades, 'config.ini')
+        config = configparser.ConfigParser()
+        if os.path.exists(ruta_config_local):
+            config.read(ruta_config_local)
+        if not config.has_section('Settings'):
+            config.add_section('Settings')
+        config.set('Settings', 'ruta', ruta)
+        with open(ruta_config_local, 'w') as configfile:
+            config.write(configfile)
+        
