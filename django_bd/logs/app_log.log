@@ -1,28 +1,108 @@
-2025-02-06 07:59:27,537 - INFO - Iniciando aplicación...
-2025-02-06 07:59:27,538 - DEBUG - Versión de Python: 3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]
-2025-02-06 07:59:27,538 - DEBUG - Sistema operativo: nt
-2025-02-06 07:59:28,237 - INFO - Módulos para menú admin importados correctamente.
-2025-02-06 07:59:28,239 - INFO - Módulos para menú de compras importados correctamente.
-2025-02-06 07:59:28,239 - INFO - Módulos para main importados correctamente
-2025-02-06 07:59:28,240 - INFO - Iniciando bucle principal
-2025-02-06 07:59:28,251 - DEBUG - interfaz de main inicializada
-2025-02-06 07:59:28,259 - DEBUG - Buscando imagen en: C:\Users\roddy\Documents\github\SistemaDeFacturacion\django_bd\logo.jpg
-2025-02-06 07:59:28,260 - DEBUG - Intentando cargar imagen desde: C:\Users\roddy\Documents\github\SistemaDeFacturacion\django_bd\logo.jpg
-2025-02-06 07:59:28,337 - DEBUG - Botón creado: Administrador
-2025-02-06 07:59:28,340 - DEBUG - Botón creado: Compras
-2025-02-06 07:59:28,342 - DEBUG - Botón creado: Salir
-2025-02-06 07:59:28,342 - DEBUG - Interfaz gráfica creada correctamente
-2025-02-06 07:59:29,675 - INFO - Intentando acceder como administrador
-2025-02-06 07:59:29,681 - DEBUG - VentanaLogin inicializada.
-2025-02-06 07:59:29,703 - INFO - VentanaLogin configurada correctamente.
-2025-02-06 07:59:33,579 - DEBUG - Validando login.
-2025-02-06 07:59:33,579 - INFO - Módulos de autenticación importados correctamente.
-2025-02-06 07:59:34,292 - INFO - Login exitoso para usuario: dean
-2025-02-06 07:59:34,304 - DEBUG - Login de administrador exitoso
-2025-02-06 07:59:34,324 - DEBUG - VentanaAdmin inicializada.
-2025-02-06 07:59:34,506 - INFO - VentanaAdmin configurada correctamente.
-2025-02-06 07:59:34,614 - INFO - Ventana de administración mostrada
-2025-02-06 08:00:02,548 - INFO - Se ha solicitado volver al menú principal desde VentanaAdmin.
-2025-02-06 08:00:04,470 - INFO - Solicitud de salida recibida
-2025-02-06 08:00:05,706 - INFO - Usuario confirmó salida
-2025-02-06 08:00:05,768 - INFO - Aplicación finalizada correctamente
+2025-02-06 11:09:51,923 - INFO - Iniciando aplicación...
+2025-02-06 11:09:51,924 - DEBUG - Versión de Python: 3.12.7 (tags/v3.12.7:0b05ead, Oct  1 2024, 03:06:41) [MSC v.1941 64 bit (AMD64)]
+2025-02-06 11:09:51,924 - DEBUG - Sistema operativo: nt
+2025-02-06 11:09:52,654 - INFO - Módulos para menú admin importados correctamente.
+2025-02-06 11:09:52,656 - INFO - Módulos para menú de compras importados correctamente.
+2025-02-06 11:09:52,656 - INFO - Módulos para main importados correctamente
+2025-02-06 11:09:52,657 - INFO - Iniciando bucle principal
+2025-02-06 11:09:52,678 - DEBUG - interfaz de main inicializada
+2025-02-06 11:09:52,689 - DEBUG - Buscando imagen en: C:\Users\roddy\Documents\github\SistemaDeFacturacion\django_bd\logo.jpg
+2025-02-06 11:09:52,691 - DEBUG - Intentando cargar imagen desde: C:\Users\roddy\Documents\github\SistemaDeFacturacion\django_bd\logo.jpg
+2025-02-06 11:09:52,743 - DEBUG - Botón creado: Administrador
+2025-02-06 11:09:52,744 - DEBUG - Botón creado: Compras
+2025-02-06 11:09:52,745 - DEBUG - Botón creado: Salir
+2025-02-06 11:09:52,746 - DEBUG - Interfaz gráfica creada correctamente
+2025-02-06 11:09:57,589 - INFO - Intentando acceder como cliente
+2025-02-06 11:09:57,596 - DEBUG - Ventana de compras inicializada.
+2025-02-06 11:09:57,597 - DEBUG - intentando construir los elementos de la interfaz de compras
+2025-02-06 11:09:57,669 - DEBUG - lista de productos creada correctamente
+2025-02-06 11:09:57,731 - INFO - Ventana de compras mostrada
+2025-02-06 11:10:00,422 - DEBUG - Volviendo al menú principal desde el menú de compras.
+2025-02-06 11:10:08,992 - INFO - Intentando acceder como cliente
+2025-02-06 11:10:08,997 - DEBUG - Ventana de compras inicializada.
+2025-02-06 11:10:09,001 - DEBUG - intentando construir los elementos de la interfaz de compras
+2025-02-06 11:10:09,039 - DEBUG - lista de productos creada correctamente
+2025-02-06 11:10:09,093 - INFO - Ventana de compras mostrada
+2025-02-06 11:10:11,876 - INFO - filtrando productos por la categoría: tecnología
+2025-02-06 11:10:13,471 - INFO - filtrando productos por la categoría: tecnología
+2025-02-06 11:13:36,716 - DEBUG - Volviendo al menú principal desde el menú de compras.
+2025-02-06 11:14:15,735 - INFO - Intentando acceder como administrador
+2025-02-06 11:14:15,742 - DEBUG - VentanaLogin inicializada.
+2025-02-06 11:14:15,776 - INFO - VentanaLogin configurada correctamente.
+2025-02-06 11:14:29,648 - INFO - Login cancelado por el usuario.
+2025-02-06 11:14:30,398 - INFO - Intentando acceder como cliente
+2025-02-06 11:14:30,402 - DEBUG - Ventana de compras inicializada.
+2025-02-06 11:14:30,403 - DEBUG - intentando construir los elementos de la interfaz de compras
+2025-02-06 11:14:30,433 - DEBUG - lista de productos creada correctamente
+2025-02-06 11:14:30,481 - INFO - Ventana de compras mostrada
+2025-02-06 11:14:32,249 - INFO - filtrando productos por la categoría: tecnología
+2025-02-06 11:14:36,288 - INFO - El usuario intenta comprar un producto.
+2025-02-06 11:14:36,289 - INFO - el producto seleccionado es: 001p
+2025-02-06 11:14:36,290 - INFO - el producto encontrado es: lapto
+2025-02-06 11:14:36,313 - INFO - Intentando agregar este producto al carrito: lapto
+2025-02-06 11:14:36,893 - INFO - la cantidad que se agregará al carrito es: 1
+2025-02-06 11:14:36,893 - INFO - el producto no está en el carrito, agregándolo como nuevo
+2025-02-06 11:14:36,894 - INFO - Detalle del producto agregado : {'producto': <Producto: lapto>, 'codigo': '001p', 'nombre': 'lapto', 'cantidad': 1, 'precio': 500.5, 'total': 500.5}
+2025-02-06 11:14:36,894 - INFO - Producto agregado al carrito: lapto
+2025-02-06 11:14:36,904 - INFO - actualizando la lista de productos
+2025-02-06 11:14:36,906 - INFO - botones de quitar y facturar habilitados
+2025-02-06 11:14:40,121 - INFO - El usuario intenta comprar un producto.
+2025-02-06 11:14:40,122 - INFO - el producto seleccionado es: 003p
+2025-02-06 11:14:40,123 - INFO - el producto encontrado es: teclado inalambrico
+2025-02-06 11:14:40,141 - INFO - Intentando agregar este producto al carrito: teclado inalambrico
+2025-02-06 11:14:40,652 - INFO - la cantidad que se agregará al carrito es: 1
+2025-02-06 11:14:40,654 - INFO - verificando si el producto ya está en el carrito
+2025-02-06 11:14:40,654 - INFO - el producto no está en el carrito, agregándolo como nuevo
+2025-02-06 11:14:40,654 - INFO - Detalle del producto agregado : {'producto': <Producto: teclado inalambrico>, 'codigo': '003p', 'nombre': 'teclado inalambrico', 'cantidad': 1, 'precio': 17.5, 'total': 17.5}
+2025-02-06 11:14:40,655 - INFO - Producto agregado al carrito: teclado inalambrico
+2025-02-06 11:14:40,662 - INFO - actualizando la lista de productos
+2025-02-06 11:14:42,700 - INFO - El usuario intenta comprar un producto.
+2025-02-06 11:14:46,063 - ERROR - el usuario intentó agregar un producto al carrito sin seleccionar uno.
+2025-02-06 11:14:50,939 - INFO - El usuario intenta comprar un producto.
+2025-02-06 11:14:50,940 - INFO - el producto seleccionado es: 003p
+2025-02-06 11:14:50,941 - INFO - el producto encontrado es: teclado inalambrico
+2025-02-06 11:14:50,963 - INFO - Intentando agregar este producto al carrito: teclado inalambrico
+2025-02-06 11:14:52,459 - INFO - la cantidad que se agregará al carrito es: 5
+2025-02-06 11:14:52,459 - INFO - verificando si el producto ya está en el carrito
+2025-02-06 11:14:52,460 - INFO - verificando si el producto ya está en el carrito
+2025-02-06 11:14:52,460 - INFO - el producto ya está en el carrito, actualizando cantidad y total
+2025-02-06 11:14:52,460 - INFO - la nueva cantidad del producto en el carrito es: 6
+2025-02-06 11:14:52,460 - INFO - actualizando la lista del carrito...
+2025-02-06 11:14:52,469 - INFO - actualizando la lista de productos
+2025-02-06 11:14:59,733 - INFO - El usuario intenta comprar un producto.
+2025-02-06 11:14:59,734 - INFO - el producto seleccionado es: 002p
+2025-02-06 11:14:59,736 - INFO - el producto encontrado es: celular infinix
+2025-02-06 11:14:59,774 - INFO - Intentando agregar este producto al carrito: celular infinix
+2025-02-06 11:15:00,551 - INFO - la cantidad que se agregará al carrito es: 1
+2025-02-06 11:15:00,551 - INFO - verificando si el producto ya está en el carrito
+2025-02-06 11:15:00,551 - INFO - verificando si el producto ya está en el carrito
+2025-02-06 11:15:00,551 - INFO - el producto no está en el carrito, agregándolo como nuevo
+2025-02-06 11:15:00,552 - INFO - Detalle del producto agregado : {'producto': <Producto: celular infinix>, 'codigo': '002p', 'nombre': 'celular infinix', 'cantidad': 1, 'precio': 200.0, 'total': 200.0}
+2025-02-06 11:15:00,552 - INFO - Producto agregado al carrito: celular infinix
+2025-02-06 11:15:00,560 - INFO - actualizando la lista de productos
+2025-02-06 11:15:10,027 - INFO - El usuario intenta quitar un producto del carrito.
+2025-02-06 11:15:10,052 - INFO - Intentando quitar un producto del carrito
+2025-02-06 11:15:11,980 - INFO - la Cantidad a quitar es: 3
+2025-02-06 11:15:11,980 - INFO - la nueva cantidad del producto es: 3
+2025-02-06 11:15:11,981 - INFO - la cantidad del producto en la interfaz del carrito ha sido actualizada
+2025-02-06 11:15:13,810 - INFO - El usuario intenta generar una factura.
+2025-02-06 11:15:13,811 - INFO - Módulo 'AgregarCliente' importado correctamente
+2025-02-06 11:15:13,811 - INFO - Creando cuadro de diálogo para seleccionar cliente
+2025-02-06 11:15:22,353 - INFO - Buscando cliente por esta cédula 
+2025-02-06 11:15:22,363 - INFO - Factura creada para el cliente: roddy romero
+2025-02-06 11:15:22,364 - DEBUG - Añadiendo producto a la factura: lapto, cantidad: 1
+2025-02-06 11:15:22,374 - DEBUG - Añadiendo producto a la factura: teclado inalambrico, cantidad: 3
+2025-02-06 11:15:22,386 - DEBUG - Añadiendo producto a la factura: celular infinix, cantidad: 1
+2025-02-06 11:15:22,412 - INFO - Stock actualizado
+2025-02-06 11:15:22,414 - INFO - filtrando productos por la categoría: tecnología
+2025-02-06 11:15:22,430 - INFO - Carrito limpiado y botones deshabilitados
+2025-02-06 11:15:22,735 - INFO - Configuración leída correctamente
+2025-02-06 11:15:22,735 - INFO - Ruta  de las facturas: C:\Users\roddy\OneDrive\Documentos
+2025-02-06 11:15:22,754 - INFO - Fecha formateada: 06-02-2025, Nombre del cliente: roddyromero, Hora de la factura: 11-15-22
+2025-02-06 11:15:22,757 - INFO - Información de la empresa obtenida correctamente
+2025-02-06 11:15:22,774 - INFO - PDF de la factura guardado en: C:\Users\roddy\OneDrive\Documentos\facturas\06-02-2025\roddyromero\factura_11-15-22.pdf
+2025-02-06 11:15:28,093 - INFO - factura generada con éxito, Intentando imprimir el PDF con los detalles
+2025-02-06 11:15:29,743 - DEBUG - Volviendo al menú principal desde el menú de compras.
+2025-02-06 11:15:30,386 - INFO - Solicitud de salida recibida
+2025-02-06 11:15:31,103 - INFO - Usuario confirmó salida
+2025-02-06 11:15:31,145 - INFO - Aplicación finalizada correctamente

@@ -120,7 +120,11 @@ class VentanaBienvenida(wx.Frame):
             raise
 
     def entrar_como_admin(self, event):
-        """Manejador para el botón de administrador"""
+        """
+        Manejador para el botón de administrador
+        Muestra la ventana de login y, si es exitoso, abre la ventana de administración
+        en caso contrario, muestra un mensaje de error y vuelve a mostrar la ventana principal
+        """
         try:
             logger.info("Intentando acceder como administrador")
             dialogo_login = VentanaLogin(self)
@@ -144,9 +148,9 @@ class VentanaBienvenida(wx.Frame):
         """Manejador para el botón de compras"""
         try:
             logger.info("Intentando acceder como cliente")
-            self.Hide()
             try:
                 MenuCompras(self).Show()
+                self.Hide()
                 logger.info("Ventana de compras mostrada")
             except Exception as e:
                 logger.error("Error al mostrar ventana de compras: %s", traceback.format_exc())

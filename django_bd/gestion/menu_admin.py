@@ -20,7 +20,7 @@ except ImportError as e:
     logger.critical("Error al importar módulos: %s", traceback.format_exc())
     raise
 
-class VentanaAdmin(wx.Frame):
+class VentanaAdmin(wx.Dialog):
     def __init__(self, parent):
         try:
             super().__init__(parent, title="Sistema de Gestión - Administrador", size=(1024, 768))

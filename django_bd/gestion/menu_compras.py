@@ -16,7 +16,7 @@ except ImportError as e:
     raise
 
 
-class MenuCompras(wx.Frame):
+class MenuCompras(wx.Dialog):
     def __init__(self, parent):
         try:
             super(MenuCompras, self).__init__(parent, title="Menu de Compras", size=(800, 600))
